@@ -19,5 +19,5 @@ ibov_fatiado = ibov[ibov.index.year == 2022]
 ibov_fatiado["Close"].plot(figsize=(22,8), label="IBOV")
 ibov_fatiado["Close"].rolling(21).mean().plot(label="MM21")
 ibov_fatiado["Close"].rolling(200).mean().plot(label="MM200")
-plt.legend();
+plt.legend()
 plt.show()

@@ -18,17 +18,14 @@ class DataFormat:
         self.remove_columns()
         return self.df
 
-
     def rename_coluns(self):
         self.df = self.df.rename({'Open': 'Abertura', 'Close': 'Fechamento'}, axis=1)
         return
-
 
     def remove_index(self):
         self.df['dia'] = self.df.index
         self.df = self.df.reset_index(drop=True)
         return
-
 
     def remove_columns(self):
         self.df = self.df.drop(['High', 'Low', 'Dividends', 'Stock Splits', 'Volume'], 1)

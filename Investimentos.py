@@ -33,15 +33,33 @@ yf.pdr_override()
 # plt.legend()
 # plt.show()
 
-tickers = ['^BVSP', 'USDBRL=X', 'VALE3.SA', 'PETR4.SA']
-carteira = web.get_data_yahoo(tickers, start='2010-01-01', end='2022-06-19')['Close']
+tickers = ['ABEV3.SA', 'ITSA4.SA', 'VALE3.SA', 'PETR4.SA']
+carteira = web.get_data_yahoo(tickers, period='5y') ["Adj Close"]
+ibov = web.get_data_yahoo('^BVSP', period='5y') ["Adj Close"]
 carteira = carteira.dropna()
 sns.set()
-carteira.plot(subplots=True, figsize=(22,8))
-carteira.columns = ['Petrobras', 'Dolar', 'Vale', 'Ibov']
+# carteira.plot(figsize=(18,8), label="Carteira")
+# carteira.plot(subplots=True, figsize=(22,8))
+# carteira.columns = ['Ambev', 'Itausa', 'Vale', 'Ibov']
 # print(carteira)
-plt.legend()
-plt.show()
+# print(ibov)
+# print(carteira)
+# plt.legend()
+# plt.show()
 
 # sns.heatmap(carteira.corr(), annot=True)
 # plt.show()
+
+carteira_normalizada = (carteira / carteira.iloc[0])*1000
+# print(carteira_normalizada)
+# carteira_normalizada.plot(figsize=(18,8))
+# plt.show()
+# plt.legend()
+carteira_normalizada["saldo"] = carteira_normalizada.sum(axis=1)
+print(carteira_normalizada)
+ibov_normalizado = (ibov / ibov.iloc[0])*5000
+print(ibov_normalizado)
+carteira_normalizada["saldo"].plot(figsize=(18,8), label='Minha Carteira')
+ibov_normalizado.plot(label='IBov')
+plt.show()
+plt.legend()
